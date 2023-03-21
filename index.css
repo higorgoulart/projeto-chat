@@ -1,0 +1,182 @@
+/* Feito por Higor e Guilherme Savio */
+
+:root {
+    --background-light-theme: #fff;
+    --border-light-theme: #eee;
+    --text-light-theme: #333;
+    --msg-sent-light-theme: #f5f5f5;
+    --background-dark-theme: #222;
+    --border-dark-theme: #444;
+    --text-dark-theme: #fff;
+    --msg-sent-dark-theme: #eee;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: var(--text-light-theme);
+}
+
+header {
+    background-color: var(--background-light-theme);
+    border-bottom: 1px solid var(--border-light-theme);
+    padding: 0 20px 0 20px;
+}
+
+#title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#mode-toggle {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#mode-toggle img {
+    height: 20px;
+}
+
+#moon-icon {
+    display: none;
+}
+
+main {
+    margin: 20px;
+}
+
+#screen {
+    height: 400px;
+    overflow: auto;
+    border: 1px solid var(--border-light-theme);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+}
+
+.you,
+.me {
+    display: flex;
+    flex-direction: column;
+}
+
+.you {
+    align-items: flex-start;
+}
+
+.me {
+    align-items: flex-end;
+}
+
+.msg-user {
+    font-size: 14px;
+    color: #aaa;
+    margin: 5px 0 2px 0;
+}
+
+.msg-sent {
+    font-size: 16px;
+    background-color: var(--msg-sent-light-theme);
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin: 0 0 8px 0;
+}
+
+#send {
+    display: flex;
+    margin-top: 20px;
+}
+
+#message {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+    background-color: #f5f5f5;
+}
+
+#send button {
+    background-color: #333;
+    color: var(--background-light-theme);
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#send button:hover {
+    background-color: #555;
+}
+
+/* #region dark-mode */
+
+body.dark-mode {
+    background-color: var(--background-dark-theme);
+    color: var(--text-dark-theme);
+}
+
+body.dark-mode #sun-icon {
+    display: none;
+}
+
+body.dark-mode #moon-icon {
+    display: block;
+}
+
+body.dark-mode #title {
+    color: var(--text-dark-theme);
+}
+
+body.dark-mode header {
+    background-color: var(--background-dark-theme);
+    border-color: var(--border-dark-theme);
+}
+
+body.dark-mode #screen {
+    border-color: var(--border-dark-theme);
+}
+
+body.dark-mode .msg-sent {
+    background-color: var(--border-dark-theme);
+    color: var(--msg-sent-dark-theme);
+}
+
+body.dark-mode #message {
+    background-color: #333;
+    color: var(--text-dark-theme);; 
+}
+
+body.dark-mode ::-webkit-scrollbar {
+    background-color: #333;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background-color: #666;
+}
+
+/* #endregion */
