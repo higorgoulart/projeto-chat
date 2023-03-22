@@ -1,6 +1,7 @@
 // Feito por Higor e Guilherme Savio
 
 const screen = $('#screen');
+const body = document.body;
 const message = document.getElementById('message');
 const apiKey = '';
 
@@ -9,7 +10,7 @@ message.addEventListener('keyup', function(e) {
 });
 
 function toggleMode() {
-    document.body.classList.toggle('dark-mode');
+    body.classList.toggle('dark-mode');
 }
 
 function buttonOnClick() {
@@ -49,7 +50,7 @@ function getAnswer(msg) {
     }
 
     screen.append(message);
-    screen.scrollTop(screen[0].scrollHeight);
+    screen.animate({scrollTop: body.scrollHeight});
 
     fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -64,7 +65,11 @@ function getAnswer(msg) {
         .then(response => response.json())
         .then(data => {
             message.children('.msg-sent').html(data.choices[0].message.content)
-            screen.scrollTop(screen[0].scrollHeight);
+            screen.animate({scrollTop: body.scrollHeight});
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            console.error(error);
+
+            message.remove()
+        });
 }
