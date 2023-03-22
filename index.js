@@ -26,7 +26,7 @@ function buttonOnClick() {
 }
 
 function sendMessage(msg) {
-    let message = `
+    let msgSent = `
         <div class="me">
             <div class="msg-user">Você diz:</div>
             ${msg === ''
@@ -34,23 +34,24 @@ function sendMessage(msg) {
                 : `<div class="msg-sent">${msg}</div>`}
         </div>`;
 
-    screen.append(message);
-    screen.scrollTop(screen[0].scrollHeight);
+    screen.append(msgSent);
+    scrollDown();
 }
 
 function getAnswer(msg) {
-    let message = $(`
+    let answer = $(`
         <div class="you">
             <div class="msg-user">Atendente diz:</div>
             <div class="msg-sent">...</div>
         </div>`);
-    
-    if (apiKey === '') {
-        message.children('.msg-sent').html('Coloque a chave da API do ChatGPT na constante "apiKey"!')
-    }
 
-    screen.append(message);
-    screen.animate({scrollTop: body.scrollHeight});
+    screen.append(answer);
+    scrollDown();
+
+    if (apiKey === '') {
+        changeMessage(answer, 'Coloque a chave da API do ChatGPT na constante "apiKey"!');
+        return;
+    }
 
     fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -64,12 +65,19 @@ function getAnswer(msg) {
         })
         .then(response => response.json())
         .then(data => {
-            message.children('.msg-sent').html(data.choices[0].message.content)
-            screen.animate({scrollTop: body.scrollHeight});
+            changeMessage(answer, data.choices[0].message.content);
+            scrollDown();
         })
         .catch(error => {
             console.error(error);
-
             message.remove()
         });
+}
+
+function scrollDown() {
+    screen.animate({ scrollTop: body.scrollHeight });
+}
+
+function changeMessage(element, message) {
+    element.children('.msg-sent').html(message);
 }
